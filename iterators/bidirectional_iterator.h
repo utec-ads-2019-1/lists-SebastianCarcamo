@@ -5,28 +5,42 @@
 
 template <typename T> 
 class BidirectionalIterator : public Iterator<T> {
+private:
+    Node<T>* last;
     public:
         BidirectionalIterator() : Iterator<T>() {};
+        
         BidirectionalIterator(Node<T> *node) : Iterator<T>(node) {};
 
+        BidirectionalIterator(Node<T> *node,Node<T>*last_): Iterator<T>(node){
+            last = last_;
+        };
+
         BidirectionalIterator<T> operator=(BidirectionalIterator<T> other) {
-            // TODO
+            this->current = other.current;
+            return *this;
         }
 
         bool operator!=(BidirectionalIterator<T> other) {
-            // TODO
+            return this->current != other.current;
         }
 
         BidirectionalIterator<T> operator++() {
-            // TODO
+            this->current = this->current->next;
+            return this->current;
         }
 
         BidirectionalIterator<T> operator--() {
-            // TODO
+            if(this->current == nullptr){
+                this->current = last;
+            }else{
+                this->current = this->current->prev;
+            }
+            return *this;
         }
 
         T operator*() {
-            // TODO
+            return this->current->data;
         }
 };
 

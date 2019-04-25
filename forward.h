@@ -10,51 +10,101 @@ class ForwardList : public List<T> {
         ForwardList() : List<T>() {}
 
         T front() {
-            // TODO
+            return (this->head)->data;
         }
 
         T back() {
-            // TODO
+            return (this->tail)->data;
         }
 
         void push_front(T value) {
-            // TODO
+            this->nodes++;
+            Node<T>* frontadd = new Node<T>(value);
+            frontadd->next = this->head;
+            this->head = frontadd;
         }
 
         void push_back(T value) {
-            // TODO
+            this->nodes++;
+            Node<T>* backadd = new Node<T>(value);
+            backadd->next = this->head;
+            this->tail = backadd;
         }
 
         void pop_front() {
-            // TODO
+            this->nodes--;
+            Node<T>* aux = this->head;
+            this->head = (this->head)->next;
+            delete aux;
         }
 
         void pop_back() {
-            // TODO
+            this->nodes--;
+            Node<T>* aux = this->head;
+            while((aux->next)->next!=nullptr){
+                aux = aux->next;
+            }
+            delete aux->next;
+            aux->next = nullptr;
+            this->tail = aux;
         }
 
         T operator[](int index) {
-            // TODO
+            Node<T>* aux = this->head;
+
+            for(int i =0;i<index;i++){
+                if(aux == nullptr){
+                    throw out_of_range("Segmentation Fault");
+                }
+                aux = aux->next;
+            }
+            return aux->data;
         }
 
         bool empty() {
-            // TODO
+            return this->nodes==0;
         }
 
         int size() {
-            // TODO
+           return this->nodes;
         }
 
         void clear() {
-            // TODO
+            this->head->killSelf();
+            this->head = nullptr;
+            this->tail = nullptr;
         }
 
         void sort() {
-            // TODO
+            Node<T>* aux = this->head;
+            int valor;
+            for(int i = 0;i<this->size();i++){
+                while(aux->next != nullptr){
+                    if(aux->data > aux->next->data){
+                        valor = aux->data;
+                        aux->data = aux->next->data;
+                        aux->next->data = valor;
+                        aux = aux->next;
+                    }else{
+                    aux = aux->next;
+                }
+                }
+                aux = this->head;
+            }
         }
     
         void reverse() {
-            // TODO
+            Node<T>* current = this->head;
+            Node<T>* aux = nullptr;
+            Node<T>* next = nullptr;
+
+            while(current!=nullptr){
+                next = current->next;
+                current->next = aux;
+                aux=current;
+                current=next;
+            }
+            this->head = aux;
         }
 
         string name() {
@@ -62,15 +112,18 @@ class ForwardList : public List<T> {
         }
 
         ForwardIterator<T> begin() {
-            // TODO
+            return ForwardIterator<T>(this->head);
         }
 
 	    ForwardIterator<T> end() {
-            // TODO
+            return nullptr;
         }
 
         void merge(ForwardList<T> list) {
-            // TODO
+             while(list.size()!=0){
+                push_back(list.front());
+                list.pop_front();
+            }
         }
 };
 
