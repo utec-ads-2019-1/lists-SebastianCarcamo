@@ -27,9 +27,10 @@ class List {
         virtual void reverse() = 0;
         virtual string name() = 0;
 
-        ~List() {
+        /*~List() {
+            // Así no es el destructor completo
             delete this;
-        }
+        }*/
 };
 
 #endif

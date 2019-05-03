@@ -9,10 +9,12 @@ class CircularLinkedList : public List<T> {
         CircularLinkedList() : List<T>() {}
 
         T front() {
+            // Falta el caso vacío
             return this->head->data;
         }
 
         T back() {
+            // Falta el caso vacío
             return this->tail->data;
         }
 
@@ -52,6 +54,7 @@ class CircularLinkedList : public List<T> {
         }
 
         T operator[](int index) {
+            // Falta el caso vacío
             Node<T>* aux = this->head;
             for(int i = 0;i<index;i++){
                 aux = aux->next;

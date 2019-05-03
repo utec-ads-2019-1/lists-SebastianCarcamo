@@ -1,7 +1,7 @@
 #include "tester.h"
 
 void Tester::execute() {
-    Collection collections[] = { forward_list , linked_list, circular_list };
+    Collection collections[] = { forward_list, linked_list/*, circular_list*/ };
     size_t numberOfCollections = sizeof(collections) / sizeof(collections[0]);
 
     for (int i = 0; i < numberOfCollections; i++) {
@@ -183,4 +183,10 @@ void Tester::testCircularLinked(CircularLinkedList<T>* list) {
     --it;
     --it;
     ASSERT(*it == elements[4], "The " + list->name() + " iterator is not working");
+
+    /*int i = 0;
+    for (it = list->begin(); it != list->end(); ++it) {
+        ASSERT(*it == elements[i], "The " + list->name() + " iterator is not working");
+        ++i;
+    }*/
 }

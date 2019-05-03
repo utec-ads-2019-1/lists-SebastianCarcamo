@@ -40,6 +40,7 @@ private:
         }
 
         T operator*() {
+            // Falta el caso vacío
             return this->current->data;
         }
 };

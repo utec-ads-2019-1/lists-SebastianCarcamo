@@ -29,6 +29,7 @@ class LinkedList : public List<T> {
             this->nodes++;
             Node<T>* backadd = new Node<T>(value);
             backadd->prev = this->tail;
+            // esto va a dar error en el primer caso
             (this->tail)->next = backadd;
             this->tail = backadd;
         }
